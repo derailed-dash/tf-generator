@@ -108,7 +108,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 .venv*
 env/
@@ -193,5 +192,4 @@ locust_env
 my_env.tfvars
 .streamlit_chats
 .saved_chats
-.env
 .requirements.txt
