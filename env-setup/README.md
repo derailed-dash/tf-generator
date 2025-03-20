@@ -46,6 +46,17 @@ gcloud auth application-default set-quota-project $GOOGLE_CLOUD_PROJECT_STAGING
 
 ## Prereqs
 
+### Linux Packages
+
+```bash
+# Install any missing packages
+sudo apt install make
+sudo apt install git-crypt
+```
+
+- Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install#linux)
+- Install [Terraform](https://developer.hashicorp.com/terraform/install)
+
 ### Python Env
 
 One time creation of a Python virtual environment (per machine):
@@ -95,7 +106,6 @@ Now:
 
 ```bash
 # If using git crypt (optional)
-sudo apt install git-crypt
 git-crypt unlock path/to/git-crypt-key # If you have an existing key for decryption
 
 # Git user information
@@ -107,6 +117,19 @@ git add -A
 git commit -m "Initial commit"
 git push --set-upstream origin main
 ```
+
+This should trigger a build in Cloud Build immediately.  To verify, open Cloud Build in the Cloud Console, switch to the PRD project and selected region. You should see your build.
+
+Note, if the build fails with an error like this:
+
+```text
+Your build failed to run: failed precondition: due to quota restrictions, cannot run builds in this region, see https://cloud.google.com/build/docs/locations#restricted_regions_for_some_projects
+```
+
+Then it's likely you have a quote limit on the Cloud Build API. Check in:
+IAM & Admin > Quote & System Limits > Look for "Cloud Build" APIs. If any show a quota value of 0, you will need to request a quota increase.
+
+**Now is a good time to restart your terminal.**
 
 ## To Test Locally
 
