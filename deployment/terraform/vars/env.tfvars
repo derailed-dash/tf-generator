@@ -30,5 +30,5 @@ cicd_runner_sa_name = "cicd-runner"
 suffix_bucket_name_load_test_results = "cicd-load-test-results"
 repository_owner = "derailed-dash"
 github_app_installation_id = "57835445"
-github_pat_secret_id = "github-connection-github-oauthtoken-50be5e"
+github_pat_secret_id = "github-connection-github-oauthtoken-218621"
 connection_exists = true
