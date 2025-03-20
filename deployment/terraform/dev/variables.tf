@@ -20,7 +20,7 @@ variable "dev_project_id" {
 variable "region" {
   type        = string
   description = "Google Cloud region for resource deployment."
-  default     = "europe-west4"
+  default     = "europe-west1"
 }
 
 variable "telemetry_bigquery_dataset_id" {

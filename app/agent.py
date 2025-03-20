@@ -20,7 +20,7 @@ from langchain_google_vertexai import ChatVertexAI
 from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-LOCATION = "europe-west4"
+LOCATION = "europe-west1"
 LLM = "gemini-2.0-flash-001"
 
 
