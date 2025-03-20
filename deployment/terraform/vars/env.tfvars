@@ -15,7 +15,6 @@ repository_name = "tf-generator"
 
 # The Google Cloud region you will use to deploy the infrastructure
 region = "europe-west1"
-builder_region = "europe-west1"
 
 telemetry_bigquery_dataset_id = "telemetry_genai_app_sample_sink"
 telemetry_sink_name = "telemetry_logs_genai_app_sample"
