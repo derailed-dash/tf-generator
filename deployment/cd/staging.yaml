@@ -32,7 +32,7 @@ steps:
         uv export --no-hashes --no-sources --no-header --no-emit-project --frozen > .requirements.txt
         uv run app/agent_engine_app.py \
           --project ${_STAGING_PROJECT_ID} \
-          --location ${_REGION} \
+          --location ${_BUILDER_REGION} \
           --set-env-vars COMMIT_SHA=${COMMIT_SHA}
     env:
       - 'PATH=/usr/local/bin:/usr/bin:~/.local/bin'
@@ -109,6 +109,7 @@ substitutions:
   _STAGING_PROJECT_ID: YOUR_STAGING_PROJECT_ID
   _BUCKET_NAME_LOAD_TEST_RESULTS: ${PROJECT_ID}-cicd-load-test-results
   _REGION: europe-west4
+  _BUILDER_REGION: europe-west1
 
 logsBucket: gs://${PROJECT_ID}-logs-data/build-logs
 options:
