@@ -31,7 +31,7 @@ steps:
 
   # Deploy FE to Staging
   - name: "gcr.io/cloud-builders/gcloud"
-    id: deploy-staging
+    id: deploy-staging-fe
     entrypoint: gcloud
     args:
       - "run"
