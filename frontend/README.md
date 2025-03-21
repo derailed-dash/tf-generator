@@ -1,5 +1,11 @@
 # Guidance for Deploying the IaC Auto Generator Frontend
 
+These instructions describe how to deploy the FE manually.
+However, I have now incorporated all the necessary build steps into:
+
+1. Terraform - for the Artifact Registry creation and service accounts
+1. Cloud Build YAML - for the build, push and deploy of the Cloud Run services.
+
 ## Every Session
 
 For local dev, always set these variables:
@@ -50,7 +56,7 @@ docker run --rm -p 8080:8080 \
 
 ## Running in Google Cloud
 
-### Build and Push to Google Artifact Registry:
+### Build and Push to Google Artifact Registry
 
 ```bash
 # One time setup - create a GAR repo

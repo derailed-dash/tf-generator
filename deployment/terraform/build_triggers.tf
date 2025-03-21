@@ -36,6 +36,7 @@ resource "google_cloudbuild_trigger" "pr_checks" {
     "frontend/**",
     "uv.lock",
   ]
+  ignored_files   = ["README.md"] # Add this line to ignore README.md changes
   depends_on = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services, google_cloudbuildv2_repository.repo]
 }
 
@@ -62,6 +63,8 @@ resource "google_cloudbuild_trigger" "cd_pipeline" {
     "deployment/**",
     "uv.lock"
   ]
+  ignored_files   = ["README.md"] # Add this line to ignore README.md changes
+  
   substitutions = {
     _STAGING_PROJECT_ID            = var.staging_project_id
     _BUCKET_NAME_LOAD_TEST_RESULTS = resource.google_storage_bucket.bucket_load_test_results.name
