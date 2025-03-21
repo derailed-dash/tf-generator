@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # mypy: disable-error-code="arg-type"
 import json
 import uuid
@@ -33,18 +32,17 @@ from frontend.utils.stream_handler import Client, StreamHandler, get_chain_respo
 USER = "my_user"
 EMPTY_CHAT_NAME = "Empty chat"
 
-
 def setup_page() -> None:
     """Configure the Streamlit page settings."""
     st.set_page_config(
-        page_title="Playground",
+        page_title="Terraform IaC Generator",
         layout="wide",
         initial_sidebar_state="auto",
         menu_items=None,
     )
-    st.title("Playground")
+    # st.title("Playground")
+    st.header("Terraform IaC Generator", divider="rainbow")
     st.markdown(MARKDOWN_STR, unsafe_allow_html=True)
-
 
 def initialize_session_state() -> None:
     """Initialize the session state with default values."""

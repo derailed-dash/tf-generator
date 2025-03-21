@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # ruff: noqa: RUF015
-import json
 import os
 import uuid
 from typing import Any
@@ -30,11 +29,10 @@ NUM_CHAT_IN_RECENT = 3
 DEFAULT_BASE_URL = "http://localhost:8000/"
 
 DEFAULT_REMOTE_AGENT_ENGINE_ID = "N/A"
-if os.path.exists("deployment_metadata.json"):
-    with open("deployment_metadata.json") as f:
-        DEFAULT_REMOTE_AGENT_ENGINE_ID = json.load(f)["remote_agent_engine_id"]
+# if os.path.exists("deployment_metadata.json"):
+#     with open("deployment_metadata.json") as f:
+#         DEFAULT_REMOTE_AGENT_ENGINE_ID = json.load(f)["remote_agent_engine_id"]
 DEFAULT_AGENT_CALLABLE_PATH = "app.agent_engine_app.AgentEngineApp"
-
 
 class SideBar:
     """Manages the sidebar components of the Streamlit application."""
@@ -52,7 +50,8 @@ class SideBar:
         """Initialize and render the sidebar components."""
         with self.st.sidebar:
             default_agent_type = (
-                "Remote URL" if os.path.exists("Dockerfile") else "Local Agent"
+                # "Remote URL" if os.path.exists("Dockerfile") else "Local Agent"
+                "Remote Agent Engine ID"
             )
             use_agent_path = self.st.selectbox(
                 "Select Agent Type",
