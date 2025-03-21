@@ -33,6 +33,7 @@ resource "google_cloudbuild_trigger" "pr_checks" {
     "data_ingestion/**",
     "tests/**",
     "deployment/**",
+    "frontend/**",
     "uv.lock",
   ]
   depends_on = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services, google_cloudbuildv2_repository.repo]
