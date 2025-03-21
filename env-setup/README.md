@@ -1,24 +1,6 @@
 # Environment Setup Guidance
 
-## Every Session
-
-```bash
-# Set these manually...
-export GOOGLE_CLOUD_PROJECT_STAGING="<Your Google Cloud Staging Project ID>" # E.g. my-gen-ai-qa
-export GOOGLE_CLOUD_PROJECT="<Your Google Cloud Project ID>" # E.g. my-gen-ai
-export GOOGLE_CLOUD_REGION="<your region>"
-export AGENT_NAME="<your agent>"
-export REPO_NAME="<your repo>"
-export REMOTE_ENGINE_ID="<your engine id>"
-export BUCKET_NAME="<your bucket>"
-
-# Or load from .env if you have one
-source .env
-
-gcloud auth login # authenticate yourself to gcloud
-```
-
-### Google Project Creation
+## Google Project Creation
 
 Create destination Google projects.
 
@@ -37,21 +19,18 @@ gcloud services enable \
   logging.googleapis.com \
   storage-component.googleapis.com \
   aiplatform.googleapis.com
-
-# setup ADC so any locally running application can access Google APIs
-# Note that credentials will be saved to ~/.config/gcloud/application_default_credentials.json
-gcloud auth application-default login
-gcloud auth application-default set-quota-project $GOOGLE_CLOUD_PROJECT_STAGING
 ```
 
 ## Prereqs
+
+Run on any dev machine where we're running this solution.
 
 ### Linux Packages
 
 ```bash
 # Install any missing packages
 sudo apt install make
-sudo apt install git-crypt
+sudo apt install git-crypt # (Optional, if you want to encrypt any files in the repo)
 ```
 
 - Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install#linux)
@@ -65,9 +44,41 @@ One time creation of a Python virtual environment (per machine):
 python3 -m venv .venv
 source .venv/bin/activate
 pip install agent-starter-pack
+
+git-crypt unlock path/to/key # If you have any encrypted files to unlock
 ```
 
-### Local Project
+## Every Session
+
+Run with every session:
+
+```bash
+# Load from .env if you have one
+source .env
+
+# Or, run these and substitute your values...
+# export GOOGLE_CLOUD_PROJECT_STAGING="<Your Google Cloud Staging Project ID>" # E.g. my-gen-ai-qa
+# export GOOGLE_CLOUD_PROJECT="<Your Google Cloud Project ID>" # E.g. my-gen-ai
+# export GOOGLE_CLOUD_REGION="<your region>"
+# export AGENT_NAME="<your agent>"
+# export REPO_NAME="<your repo>"
+# export REMOTE_ENGINE_ID="<your engine id>"
+# export BUCKET_NAME="<your bucket>"
+
+gcloud auth login # authenticate yourself to gcloud
+
+# Check we're in the correct project
+gcloud config list project
+gcloud config set project $GOOGLE_CLOUD_PROJECT_STAGING
+export PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT_STAGING --format="value(projectNumber)")
+
+# setup ADC so any locally running application can access Google APIs
+# Note that credentials will be saved to ~/.config/gcloud/application_default_credentials.json
+gcloud auth application-default login
+gcloud auth application-default set-quota-project $GOOGLE_CLOUD_PROJECT_STAGING
+```
+
+## Local Project Creation
 
 One time run steps as described in [`googleCloudPlatform/agent-starter-pack`](https://github.com/GoogleCloudPlatform/agent-starter-pack).
 
@@ -139,3 +150,7 @@ You can run this every time you make a local change and want to test the applica
 cd $REPO_NAME
 make install && make playground # Uses Makefile
 ```
+
+If you get an error running this, you probably need to restart your terminal!
+
+
