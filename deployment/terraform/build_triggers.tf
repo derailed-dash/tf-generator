@@ -66,6 +66,12 @@ resource "google_cloudbuild_trigger" "cd_pipeline" {
     _STAGING_PROJECT_ID            = var.staging_project_id
     _BUCKET_NAME_LOAD_TEST_RESULTS = resource.google_storage_bucket.bucket_load_test_results.name
     _REGION                        = var.region
+    _CONTAINER_NAME                = var.agent_name
+    _ARTIFACT_REGISTRY_REPO_NAME   = var.artifact_registry_repo_name
+    _CLOUD_RUN_APP_SA_NAME         = var.cloud_run_app_sa_name
+    _LOG_LEVEL                     = "DEBUG"
+    _REMOTE_AGENT_ENGINE_ID        = var.remote_agent_engine_id
+    _BUCKET_NAME                   = var.bucket_name
     # Your other CD Pipeline substitutions
   }
   depends_on = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services, google_cloudbuildv2_repository.repo]
@@ -89,6 +95,12 @@ resource "google_cloudbuild_trigger" "deploy_to_prod_pipeline" {
   substitutions = {
     _PROD_PROJECT_ID             = var.prod_project_id
     _REGION                      = var.region
+    _CONTAINER_NAME              = var.agent_name
+    _ARTIFACT_REGISTRY_REPO_NAME = var.artifact_registry_repo_name
+    _CLOUD_RUN_APP_SA_NAME       = var.cloud_run_app_sa_name
+    _LOG_LEVEL                   = "INFO"
+    _REMOTE_AGENT_ENGINE_ID      = var.remote_agent_engine_id
+    _BUCKET_NAME                 = var.bucket_name
     # Your other Deploy to Prod Pipeline substitutions
   }
   depends_on = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services, google_cloudbuildv2_repository.repo]

@@ -31,3 +31,11 @@ repository_owner = "derailed-dash"
 github_app_installation_id = "57835445"
 github_pat_secret_id = "github-connection-github-oauthtoken-218621"
 connection_exists = true
+
+# frontend service
+cloud_run_app_sa_name = "agent-cr"
+
+fe_svc_version = "0.1"
+remote_agent_engine_id = "projects/981722204291/locations/europe-west1/reasoningEngines/847591523619962880"
+bucket_name = "tf-generator-npd-uploads"
+agent_name = "tf-generator"

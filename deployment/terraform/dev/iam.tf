@@ -31,6 +31,23 @@ resource "google_project_iam_member" "default_compute_sa_storage_object_creator"
   member     = "serviceAccount:${data.google_project.dev_project.number}-compute@developer.gserviceaccount.com"
   depends_on = [resource.google_project_service.services]
 }
+
+# Grant Cloud Run SA the required permissions to run the application
+resource "google_project_iam_member" "cloud_run_app_sa_roles" {
+  for_each = {
+    for pair in setproduct(keys(local.project_ids), var.cloud_run_app_roles) :
+    join(",", pair) => {
+      project = local.project_ids[pair[0]]
+      role    = pair[1]
+    }
+  }
+
+  project    = each.value.project
+  role       = each.value.role
+  member     = "serviceAccount:${google_service_account.cloud_run_app_sa.email}"
+  depends_on = [resource.google_project_service.services]
+}
+
 # Grant required permissions to Vertex AI service account
 resource "google_project_iam_member" "vertex_ai_sa_permissions" {
   for_each = {

@@ -55,7 +55,7 @@ docker run --rm -p 8080:8080 \
 ```bash
 # One time setup - create a GAR repo
 gcloud artifacts repositories create "$GAR_REPO" \
-  --location="$GOOGLE_CLOUD_REGION" --repository-format=Docker
+  --project=$GOOGLE_CLOUD_PROJECT --location="$GOOGLE_CLOUD_REGION" --repository-format=Docker
 
 # Allow authentication to the repo
 gcloud auth configure-docker "$GOOGLE_CLOUD_REGION-docker.pkg.dev"
@@ -63,7 +63,7 @@ gcloud auth configure-docker "$GOOGLE_CLOUD_REGION-docker.pkg.dev"
 # Every time we want to build a new version and push to GAR
 # This will take a couple of minutes
 gcloud builds submit \
-  --tag "$GOOGLE_CLOUD_REGION-docker.pkg.dev/$GOOGLE_CLOUD_PROJECT/$GAR_REPO/$AGENT_NAME:$VERSION"
+  --tag "${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${GAR_REPO}/$AGENT_NAME:$VERSION"
 ```
 
 ### Deploy to Cloud Run
@@ -78,7 +78,9 @@ gcloud run deploy "$AGENT_NAME" \
   --port=8080 \
   --image="$GOOGLE_CLOUD_REGION-docker.pkg.dev/$GOOGLE_CLOUD_PROJECT/$GAR_REPO/$AGENT_NAME:$VERSION" \
   --max-instances=1 \
-  --memory=1024Mi \
+  --cpu 2 \
+  --memory=2Gi \
+  --concurrency=40 \
   --allow-unauthenticated \
   --region=$GOOGLE_CLOUD_REGION \
   --platform=managed  \

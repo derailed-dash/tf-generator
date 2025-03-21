@@ -69,3 +69,21 @@ variable "agentengine_sa_roles" {
     "roles/storage.admin"
   ]
 }
+
+variable "cloud_run_app_sa_name" {
+  description = "Service account name to be used for the Cloud Run service"
+  type        = string
+  default     = "agent-cr"
+}
+
+variable "cloud_run_app_roles" {
+  description = "List of roles to assign to the Cloud Run app service account"
+  type        = list(string)
+  default = [
+    "roles/aiplatform.user",
+    "roles/discoveryengine.editor",
+    "roles/logging.logWriter",
+    "roles/cloudtrace.agent",
+    "roles/storage.admin"
+  ]
+}

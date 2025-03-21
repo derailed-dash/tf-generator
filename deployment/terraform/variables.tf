@@ -90,6 +90,7 @@ variable "suffix_bucket_name_load_test_results" {
   type        = string
   default     = "cicd-load-test-results"
 }
+
 variable "agentengine_sa_roles" {
   description = "List of roles to assign to the Agent Engine service account"
   type        = list(string)
@@ -102,11 +103,38 @@ variable "agentengine_sa_roles" {
   ]
 }
 
+variable "cloud_run_app_sa_name" {
+  description = "Service account name to be used for the Cloud Run service"
+  type        = string
+  default     = "agent-cr"
+}
+
+variable "artifact_registry_repo_name" {
+  description = "Name of the Artifact registry repository to be used to push containers"
+  type        = string
+  default     = "tf-generator"
+}
+
+variable "cloud_run_app_roles" {
+  description = "List of roles to assign to the Cloud Run app service account"
+  type        = list(string)
+  default = [
+    "roles/run.invoker",
+    "roles/aiplatform.user",
+    "roles/discoveryengine.editor",
+    "roles/logging.logWriter",
+    "roles/cloudtrace.agent",
+    "roles/storage.admin"
+  ]
+}
+
 variable "cicd_roles" {
   description = "List of roles to assign to the CICD runner service account in the CICD project"
   type        = list(string)
   default = [
+    "roles/run.invoker",    
     "roles/storage.admin",
+    "roles/run.admin",
     "roles/aiplatform.user",
     "roles/discoveryengine.editor",
     "roles/logging.logWriter",
@@ -122,6 +150,29 @@ variable "cicd_sa_deployment_required_roles" {
   default = [    
     "roles/iam.serviceAccountUser",
     "roles/aiplatform.user",
-    "roles/storage.admin"
+    "roles/storage.admin",
+    "roles/cloudbuild.builds.builder",
+    "roles/run.admin"
   ]
+}
+
+variable "fe_svc_version" {
+  type        = string
+  description = "Version of the application to deploy."
+  default     = "0.1"
+}
+
+variable "remote_agent_engine_id" {
+  type        = string
+  description = "Remote agent engine ID."
+}
+
+variable "bucket_name" {
+  type        = string
+  description = "Name of the bucket."
+}
+
+variable "agent_name" {
+  type        = string
+  description = "Name of the agent."
 }

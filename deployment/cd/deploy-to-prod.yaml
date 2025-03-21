@@ -13,6 +13,33 @@
 # limitations under the License.
 
 steps:
+  # Deploy FE to Prod
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: deploy-staging
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "$_CONTAINER_NAME"
+      - "--image"
+      - "$_REGION-docker.pkg.dev/$PROJECT_ID/$_ARTIFACT_REGISTRY_REPO_NAME/$_CONTAINER_NAME"
+      - "--region"
+      - "${_REGION}"
+      - "--project"
+      - "${_PROD_PROJECT_ID}"
+      - "--max-instances"
+      - "1"
+      - "--cpu"
+      - "2"
+      - "--memory"
+      - "2Gi"
+      - "--concurrency"
+      - "40"
+      - "--service-account"
+      - "${_CLOUD_RUN_APP_SA_NAME}@${_PROD_PROJECT_ID}.iam.gserviceaccount.com"
+      - "--set-env-vars"
+      - "COMMIT_SHA=${COMMIT_SHA},REGION=${_REGION},LOG_LEVEL=${_LOG_LEVEL},REMOTE_AGENT_ENGINE_ID=${_REMOTE_AGENT_ENGINE_ID},BUCKET_NAME=${_BUCKET_NAME}"
+
   - name: "python:3.11-slim" 
     id: install-dependencies
     entrypoint: /bin/bash
