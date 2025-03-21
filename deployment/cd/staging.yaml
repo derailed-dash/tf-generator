@@ -15,6 +15,7 @@
 steps:
   # Build and Push FE to Artifact Registry
   - name: "gcr.io/cloud-builders/docker"
+    dir: "frontend"
     args:
       [
         "build",
