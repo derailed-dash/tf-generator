@@ -44,11 +44,11 @@ docker build -t $AGENT_NAME:$VERSION .
 # We need to pass environment variables to the container
 # and the Google Application Default Credentials (ADC)
 docker run --rm -p 8080:8080 \
-  -e PROJECT_ID=$GOOGLE_CLOUD_PROJECT \
+  -e PROJECT_ID=$GOOGLE_CLOUD_PROJECT_STAGING \
   -e REGION=$GOOGLE_CLOUD_REGION \
   -e LOG_LEVEL=$LOG_LEVEL \
-  -e REMOTE_AGENT_ENGINE_ID=$REMOTE_ENGINE_ID \
-  -e BUCKET_NAME=$BUCKET_NAME \
+  -e REMOTE_AGENT_ENGINE_ID=$STAGING_REMOTE_ENGINE_ID \
+  -e BUCKET_NAME=$STAGING_BUCKET_NAME \
   -e GOOGLE_APPLICATION_CREDENTIALS="/app/.config/gcloud/application_default_credentials.json" \
   --mount type=bind,source=${HOME}/.config/gcloud,target=/app/.config/gcloud \
    $AGENT_NAME:$VERSION
@@ -90,9 +90,9 @@ gcloud run deploy "$AGENT_NAME" \
   --allow-unauthenticated \
   --region=$GOOGLE_CLOUD_REGION \
   --platform=managed  \
-  --project=$GOOGLE_CLOUD_PROJECT \
+  --project=$GOOGLE_CLOUD_PROJECT_STAGING \
   --cpu-boost \
-  --set-env-vars=PROJECT_ID=$GOOGLE_CLOUD_PROJECT,REGION=$GOOGLE_CLOUD_REGION,LOG_LEVEL=$LOG_LEVEL,REMOTE_AGENT_ENGINE_ID=$REMOTE_ENGINE_ID,BUCKET_NAME=$BUCKET_NAME
+  --set-env-vars=PROJECT_ID=$GOOGLE_CLOUD_PROJECT_STAGING,REGION=$GOOGLE_CLOUD_REGION,LOG_LEVEL=$LOG_LEVEL,REMOTE_AGENT_ENGINE_ID=$STAGING_REMOTE_ENGINE_ID,BUCKET_NAME=$STAGING_BUCKET_NAME
 
 APP_URL=$(gcloud run services describe $AGENT_NAME --platform managed --region $GOOGLE_CLOUD_REGION --format="value(status.address.url)")
 echo $APP_URL

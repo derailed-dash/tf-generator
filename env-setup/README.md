@@ -62,8 +62,10 @@ source .env
 # export GOOGLE_CLOUD_REGION="<your region>"
 # export AGENT_NAME="<your agent>"
 # export REPO_NAME="<your repo>"
-# export REMOTE_ENGINE_ID="<your engine id>"
-# export BUCKET_NAME="<your bucket>"
+# export STAGING_REMOTE_ENGINE_ID="<your engine id>"
+# export PROD_REMOTE_ENGINE_ID="<your engine id>"
+# export STAGING_BUCKET_NAME="<your bucket>"
+# export PROD_BUCKET_NAME="<your bucket>"
 
 gcloud auth login # authenticate yourself to gcloud
 

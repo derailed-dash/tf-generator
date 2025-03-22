@@ -1,8 +1,12 @@
 # Your Production Google Cloud project id
 prod_project_id = "tf-generator-prd"
+prod_bucket_name = "tf-generator-prd-uploads"
+prod_remote_agent_engine_id = "projects/505527919699/locations/europe-west1/reasoningEngines/5740752518758006784"
 
 # Your Staging / Test Google Cloud project id
 staging_project_id = "tf-generator-npd"
+staging_bucket_name = "tf-generator-npd-uploads"
+staging_remote_agent_engine_id = "projects/981722204291/locations/europe-west1/reasoningEngines/847591523619962880"
 
 # Your Google Cloud project ID that will be used to host the Cloud Build pipelines.
 cicd_runner_project_id = "tf-generator-prd"
@@ -34,8 +38,5 @@ connection_exists = true
 
 # frontend service
 cloud_run_app_sa_name = "agent-cr"
-
 fe_svc_version = "0.1"
-remote_agent_engine_id = "projects/981722204291/locations/europe-west1/reasoningEngines/847591523619962880"
-bucket_name = "tf-generator-npd-uploads"
 agent_name = "tf-generator"
