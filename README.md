@@ -2,6 +2,10 @@
 
 Turn your architecture diagrams into executable Terraform!
 
+## Context
+
+This solution was created as part of the **Google Cloud Agentic Era Hackathon**. This repo represents a few hours work by architects from EPAM over the course of the day.
+
 ## Created Using the Agent-Starter-Pack
 
 This solution has been built using the base 'ReAct agent using LangGraph' from the [`googleCloudPlatform/agent-starter-pack`](https://github.com/GoogleCloudPlatform/agent-starter-pack).
