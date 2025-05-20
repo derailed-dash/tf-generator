@@ -43,7 +43,7 @@ steps:
     args:
       - "-c"
       - |
-        uv export --no-hashes --no-sources --no-header --no-emit-project --frozen > .requirements.txt
+        uv export --no-hashes --no-header --no-emit-project --frozen > .requirements.txt
         uv run app/agent_engine_app.py \
           --project ${_PROD_PROJECT_ID} \
           --location ${_REGION} \
