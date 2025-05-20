@@ -21,8 +21,7 @@ from langchain_google_vertexai import ChatVertexAI
 from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-# LOCATION = "europe-west1"
-LOCATION = "global"
+LOCATION = "europe-west1"
 LLM = "gemini-2.0-flash-001"
 
 # 1. Define tools
@@ -116,7 +115,7 @@ tools = [generate_terraform_example, create_terraform_files]
 # 2. Set up the language model
 try:
     llm = ChatVertexAI(
-        model=LLM, location=LOCATION, temperature=0, streaming=True
+        model=LLM, location=LOCATION, temperature=0, max_tokens=16000, streaming=True
     ).bind_tools(tools)
 except Exception as e:
     import logging
