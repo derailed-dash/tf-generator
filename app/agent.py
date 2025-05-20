@@ -21,7 +21,8 @@ from langchain_google_vertexai import ChatVertexAI
 from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-LOCATION = "europe-west1"
+# LOCATION = "europe-west1"
+LOCATION = "global"
 LLM = "gemini-2.5-flash-preview-04-17"
 
 # 1. Define tools
