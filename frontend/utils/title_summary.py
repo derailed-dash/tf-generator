@@ -76,7 +76,7 @@ try:
     _, project_id = google.auth.default()
 
     llm = ChatVertexAI(
-        model_name="gemini-2.0-flash-001",
+        model_name="gemini-2.5-flash-preview-04-17",
         temperature=0,
         project=project_id,
         location=os.getenv("LOCATION", "europe-west1"),

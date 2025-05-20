@@ -22,8 +22,7 @@ from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
 LOCATION = "europe-west1"
-LLM = "gemini-2.0-flash-001"
-
+LLM = "gemini-2.5-flash-preview-04-17"
 
 # 1. Define tools
 @tool
@@ -116,23 +115,21 @@ tools = [generate_terraform_example, create_terraform_files]
 # 2. Set up the language model
 try:
     llm = ChatVertexAI(
-        model=LLM, location=LOCATION, temperature=0, max_tokens=8192, streaming=True
+        model=LLM, location=LOCATION, temperature=0, streaming=True
     ).bind_tools(tools)
 except Exception as e:
     import logging
     logging.warning(f"Error initializing Vertex AI model: {e}")
     # Fallback to a simpler configuration
     llm = ChatVertexAI(
-        model="gemini-1.5-pro", location=LOCATION, temperature=0, max_tokens=2048
+        model="gemini-2.5-pro-preview-05-06", location=LOCATION, temperature=0, max_tokens=4096
     ).bind_tools(tools)
-
 
 # 3. Define workflow components
 def should_continue(state: MessagesState) -> str:
     """Determines whether to use tools or end the conversation."""
     last_message = state["messages"][-1]
     return "tools" if last_message.tool_calls else END
-
 
 def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMessage]:
     """Calls the language model and returns the response."""
