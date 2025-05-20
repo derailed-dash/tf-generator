@@ -23,7 +23,7 @@ from langgraph.prebuilt import ToolNode
 
 # LOCATION = "europe-west1"
 LOCATION = "global"
-LLM = "gemini-2.5-flash-preview-04-17"
+LLM = "gemini-2.0-flash-001"
 
 # 1. Define tools
 @tool
@@ -123,7 +123,7 @@ except Exception as e:
     logging.warning(f"Error initializing Vertex AI model: {e}")
     # Fallback to a simpler configuration
     llm = ChatVertexAI(
-        model="gemini-2.5-pro-preview-05-06", location=LOCATION, temperature=0, max_tokens=4096
+        model="gemini-2.0-pro", location=LOCATION, temperature=0, max_tokens=8192
     ).bind_tools(tools)
 
 # 3. Define workflow components
