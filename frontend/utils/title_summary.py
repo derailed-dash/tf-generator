@@ -21,6 +21,11 @@ from langchain_core.messages import AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_google_vertexai import ChatVertexAI
 
+# LOCATION = "europe-west1"
+# LLM = "gemini-2.0-flash-001"
+LOCATION="global"
+LLM = "gemini-2.5-flash-preview-05-20"
+
 title_template = ChatPromptTemplate.from_messages(
     [
         (
@@ -76,12 +81,10 @@ try:
     _, project_id = google.auth.default()
 
     llm = ChatVertexAI(
-        # model_name="gemini-2.0-flash-001",
-        model_name = "gemini-2.5-flash-preview-05-20",
+        model_name = LLM,
         temperature=0,
         project=project_id,
-        location=os.getenv("LOCATION", "europe-west1"),
-        # location=os.getenv("LOCATION", "global"),
+        location=os.getenv("LOCATION", LOCATION),
     )
     chain_title = title_template | llm
 
