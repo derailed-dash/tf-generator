@@ -22,7 +22,8 @@ from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
 LOCATION = "europe-west1"
-LLM = "gemini-2.0-flash-001"
+# LLM = "gemini-2.0-flash-001"
+LLM = "gemini-2.5-flash-preview-05-20"
 
 # 1. Define tools
 @tool
@@ -115,14 +116,14 @@ tools = [generate_terraform_example, create_terraform_files]
 # 2. Set up the language model
 try:
     llm = ChatVertexAI(
-        model=LLM, location=LOCATION, temperature=0, max_tokens=8192, streaming=True
+        model=LLM, location=LOCATION, temperature=0, max_tokens=16000, streaming=True
     ).bind_tools(tools)
 except Exception as e:
     import logging
     logging.warning(f"Error initializing Vertex AI model: {e}")
     # Fallback to a simpler configuration
     llm = ChatVertexAI(
-        model="gemini-2.0-pro", location=LOCATION, temperature=0, max_tokens=4096
+        model="gemini-2.0-pro", location=LOCATION, temperature=0, max_tokens=8000
     ).bind_tools(tools)
 
 # 3. Define workflow components

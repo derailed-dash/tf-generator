@@ -76,7 +76,8 @@ try:
     _, project_id = google.auth.default()
 
     llm = ChatVertexAI(
-        model_name="gemini-2.0-flash-001",
+        # model_name="gemini-2.0-flash-001",
+        model_name = "gemini-2.5-flash-preview-05-20",
         temperature=0,
         project=project_id,
         location=os.getenv("LOCATION", "europe-west1"),
@@ -89,7 +90,7 @@ except Exception:
     print("WARNING: Failed to initialize Vertex AI. Using dummy LLM instead.")
 
     class DummyChain:
-        def invoke(*args: Any, **kwargs: Any) -> AIMessage:
+        def invoke(self, *args: Any, **kwargs: Any) -> AIMessage:
             return AIMessage(content="conversation")
 
     chain_title = DummyChain()
