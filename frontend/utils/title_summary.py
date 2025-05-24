@@ -21,11 +21,6 @@ from langchain_core.messages import AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_google_vertexai import ChatVertexAI
 
-# LOCATION = "europe-west1"
-# LLM = "gemini-2.0-flash-001"
-LOCATION="global"
-LLM = "gemini-2.5-flash-preview-05-20"
-
 title_template = ChatPromptTemplate.from_messages(
     [
         (
@@ -76,6 +71,12 @@ If there's not enough context in the conversation to create a meaningful title, 
         MessagesPlaceholder(variable_name="messages"),
     ]
 )
+
+LOCATION = "europe-west1"
+LLM = "gemini-2.0-flash-001"
+# LOCATION="global"
+# LLM = "gemini-2.5-flash-preview-05-20"
+
 try:
     # Initialize Vertex AI with default project credentials
     _, project_id = google.auth.default()
