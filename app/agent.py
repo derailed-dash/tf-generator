@@ -72,7 +72,7 @@ def generate_terraform_example(resource_type: str) -> str:
   }
 }"""
     }
-    
+
     return examples.get(resource_type, "Resource type not found. Try 'google_compute_instance', 'google_storage_bucket', or 'google_cloud_run_service'.")
 
 
@@ -115,14 +115,14 @@ tools = [generate_terraform_example, create_terraform_files]
 # 2. Set up the language model
 try:
     llm = ChatVertexAI(
-        model=LLM, location=LOCATION, temperature=0, max_tokens=16000, streaming=True
+        model=LLM, location=LOCATION, temperature=0, max_tokens=8192, streaming=True
     ).bind_tools(tools)
 except Exception as e:
     import logging
     logging.warning(f"Error initializing Vertex AI model: {e}")
     # Fallback to a simpler configuration
     llm = ChatVertexAI(
-        model="gemini-2.0-pro", location=LOCATION, temperature=0, max_tokens=8192
+        model="gemini-2.0-pro", location=LOCATION, temperature=0, max_tokens=4096
     ).bind_tools(tools)
 
 # 3. Define workflow components
