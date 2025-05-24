@@ -6,7 +6,9 @@ locals {
     "serviceusage.googleapis.com",
     "bigquery.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "cloudtrace.googleapis.com"
+    "cloudtrace.googleapis.com",
+    "iap.googleapis.com"
+
   ]
 
   shared_services = [
@@ -18,7 +20,8 @@ locals {
     "bigquery.googleapis.com",
     "serviceusage.googleapis.com",
     "logging.googleapis.com",
-    "cloudtrace.googleapis.com"
+    "cloudtrace.googleapis.com",
+    "iap.googleapis.com"
   ]
 
   deploy_project_ids = {

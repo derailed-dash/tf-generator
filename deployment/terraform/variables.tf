@@ -126,7 +126,8 @@ variable "cicd_roles" {
     "roles/logging.logWriter",
     "roles/cloudtrace.agent",
     "roles/artifactregistry.writer",
-    "roles/cloudbuild.builds.builder"
+    "roles/cloudbuild.builds.builder",
+    "roles/iap.admin"    
   ]
 }
 
@@ -138,7 +139,8 @@ variable "cicd_sa_deployment_required_roles" {
     "roles/aiplatform.user",
     "roles/storage.admin",
     "roles/cloudbuild.builds.builder",
-    "roles/run.admin"
+    "roles/run.admin",
+    "roles/iap.admin"
   ]
 }
 
